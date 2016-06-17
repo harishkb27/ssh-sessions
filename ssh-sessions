@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PS3='Select the menu number to ssh:'
+declare -a options
+while read l;do
+  options[${#options[@]}]=$l;
+done  < <(ps aux | sed -n '/grep/!s/\(.*\)\( ssh.*\)/\2/p')
+
+select opt in "${options[@]}"
+do
+  $opt
+  break
+done
+
